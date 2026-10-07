@@ -4,7 +4,11 @@ Laboratorio Módulo 1 Lemoncode: landing con Vite + Tailwind v4
 
 ## Tema elegido
 
-_Pendiente._
+**Opción B: la UI de mi TFM.**
+
+Mi TFM es una aplicación para gestionar el ranking interno de tenis de mi club: inscripciones, reserva de pistas, resultados de los partidos y clasificación. Ahora el profesor lo lleva todo en un Excel y recibe los resultados por correo.
+
+En este laboratorio maqueto la **landing** de la app (y, si me da tiempo, un **dashboard** con la clasificación). Solo maquetación: los datos son inventados.
 
 ## Cómo arrancarlo
 
