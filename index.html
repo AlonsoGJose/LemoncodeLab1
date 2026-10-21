@@ -8,68 +8,150 @@
     </title>
     <link rel="stylesheet" href="/src/style.css" />
   </head>
-  <body class="font-sans leading-relaxed">
-    <header
-      class="sticky top-0 z-50 flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-b border-gray-200 bg-white px-4 py-3"
-    >
-      <!-- Logo: nombre de la app pendiente -->
-      <a href="/" class="text-lg font-bold">Nombre de la app</a>
+  <body class="bg-fondo font-sans leading-relaxed text-tinta">
+    <header class="sticky top-0 z-50 bg-pista text-white">
+      <!-- Contenedor centrado: el fondo azul ocupa todo el ancho, el contenido no -->
+      <div
+        class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-6 gap-y-2 px-4 py-3"
+      >
+        <!-- Logo: nombre provisional (MyCourt) hasta decidir el definitivo -->
+        <a
+          href="/"
+          class="rounded-sm text-lg font-bold text-pelota focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-pelota"
+          >MyCourt</a
+        >
 
-      <nav aria-label="Principal">
-        <ul class="flex flex-wrap gap-x-4 gap-y-1">
-          <li><a href="#funcionalidades">Funcionalidades</a></li>
-          <li><a href="#como-funciona">Cómo funciona</a></li>
-          <li><a href="#faq">Preguntas</a></li>
-          <li><a href="#">Entrar</a></li>
-        </ul>
-      </nav>
+        <nav aria-label="Principal">
+          <ul class="flex flex-wrap gap-x-4 gap-y-1">
+            <li>
+              <a
+                href="#funcionalidades"
+                class="rounded-sm transition-colors hover:text-pelota focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-pelota"
+                >Funcionalidades</a
+              >
+            </li>
+            <li>
+              <a
+                href="#como-funciona"
+                class="rounded-sm transition-colors hover:text-pelota focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-pelota"
+                >Cómo funciona</a
+              >
+            </li>
+            <li>
+              <a
+                href="#faq"
+                class="rounded-sm transition-colors hover:text-pelota focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-pelota"
+                >Preguntas</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="rounded-sm transition-colors hover:text-pelota focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-pelota"
+                >Entrar</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
     </header>
 
     <main>
       <!-- Hero -->
       <section
         aria-labelledby="hero-titulo"
-        class="flex min-h-[33dvh] flex-col justify-center px-4 py-12"
+        class="flex min-h-[33dvh] flex-col justify-center py-12"
       >
-        <h1 id="hero-titulo" class="text-3xl font-bold">
-          El ranking de tu club, sin Excel
-        </h1>
+        <div
+          class="mx-auto grid w-full max-w-6xl items-center gap-10 px-4 md:grid-cols-2"
+        >
+          <!-- Texto -->
+          <div>
+            <h1 id="hero-titulo" class="text-4xl font-bold md:text-5xl">
+              El ranking de tu club, sin Excel
+            </h1>
+            <p class="mt-4 max-w-prose text-lg">
+              Apúntate, juega tus partidos y sube el resultado desde el móvil.
+              MyCourt actualiza la clasificación al momento, sin hojas de
+              cálculo ni correos.
+            </p>
+
+            <div class="mt-8 flex flex-wrap gap-3">
+              <!-- Botón principal -->
+              <a
+                href="#apuntate"
+                class="rounded-lg border-2 border-pista bg-pista px-5 py-3 font-semibold text-white transition-colors hover:border-pista-oscuro hover:bg-pista-oscuro focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pista"
+                >Apúntate al ranking</a
+              >
+              <!-- Botón secundario -->
+              <a
+                href="#como-funciona"
+                class="rounded-lg border-2 border-pista px-5 py-3 font-semibold text-pista transition-colors hover:bg-pista hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pista"
+                >Ver cómo funciona</a
+              >
+            </div>
+          </div>
+
+          <!-- Imagen: pendiente de elegir la foto (public/img/hero-pista.webp). Revisar el alt cuando esté. -->
+          <img
+            src="/img/hero-pista.webp"
+            alt="Pista de tenis dura de color azul vista desde arriba"
+            width="1200"
+            height="900"
+            class="aspect-4/3 w-full rounded-xl bg-borde object-cover shadow-lg"
+          />
+        </div>
       </section>
 
       <!-- Tarjetas (O5) -->
       <section
         id="funcionalidades"
         aria-labelledby="funcionalidades-titulo"
-        class="px-4 py-12"
+        class="py-12"
       >
-        <h2 id="funcionalidades-titulo" class="mb-6 text-2xl font-bold">
-          Todo lo que puedes hacer
-        </h2>
+        <div class="mx-auto max-w-6xl px-4">
+          <h2 id="funcionalidades-titulo" class="mb-6 text-2xl font-bold">
+            Todo lo que puedes hacer
+          </h2>
 
-        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          <article class="rounded-lg border border-gray-200 p-4">
-            <h3 class="font-semibold">Reservar pista</h3>
-          </article>
+          <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <!-- Prueba de imagen: el resto de tarjetas se adaptarán igual cuando estén sus fotos -->
+            <article
+              class="overflow-hidden rounded-lg border border-borde bg-white"
+            >
+              <img
+                src="/img/reservar-pista.webp"
+                alt="Pista de tenis dura azul vacía, vista desde la entrada de la grada"
+                width="800"
+                height="533"
+                loading="lazy"
+                class="aspect-video w-full object-cover"
+              />
+              <div class="p-4">
+                <h3 class="font-semibold">Reservar pista</h3>
+              </div>
+            </article>
 
-          <article class="rounded-lg border border-gray-200 p-4">
-            <h3 class="font-semibold">Clasificación</h3>
-          </article>
+            <article class="rounded-lg border border-borde bg-white p-4">
+              <h3 class="font-semibold">Clasificación</h3>
+            </article>
 
-          <article class="rounded-lg border border-gray-200 p-4">
-            <h3 class="font-semibold">Mis partidos</h3>
-          </article>
+            <article class="rounded-lg border border-borde bg-white p-4">
+              <h3 class="font-semibold">Mis partidos</h3>
+            </article>
 
-          <article class="rounded-lg border border-gray-200 p-4">
-            <h3 class="font-semibold">Subir resultado</h3>
-          </article>
+            <article class="rounded-lg border border-borde bg-white p-4">
+              <h3 class="font-semibold">Subir resultado</h3>
+            </article>
 
-          <article class="rounded-lg border border-gray-200 p-4">
-            <h3 class="font-semibold">Normas</h3>
-          </article>
+            <article class="rounded-lg border border-borde bg-white p-4">
+              <h3 class="font-semibold">Normas</h3>
+            </article>
 
-          <article class="rounded-lg border border-gray-200 p-4">
-            <h3 class="font-semibold">Mi perfil</h3>
-          </article>
+            <article class="rounded-lg border border-borde bg-white p-4">
+              <h3 class="font-semibold">Mi perfil</h3>
+            </article>
+          </div>
         </div>
       </section>
     </main>

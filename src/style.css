@@ -1,1 +1,14 @@
 @import "tailwindcss";
+
+@theme {
+  /* Marca */
+  --color-pista: #1e4f8c; /* azul pista dura: cabecera, botones principales, enlaces */
+  --color-pista-oscuro: #163a66; /* hover de lo anterior */
+  --color-pelota: #d7f205; /* amarillo pelota: acentos, botón destacado, datos */
+  --color-pelota-oscuro: #b8d000; /* hover del acento */
+
+  /* Neutros */
+  --color-tinta: #0f172a; /* texto principal */
+  --color-fondo: #f8fafc; /* fondo de la página */
+  --color-borde: #e2e8f0; /* bordes de tarjetas y separadores */
+}
