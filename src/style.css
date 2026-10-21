@@ -12,3 +12,71 @@
   --color-fondo: #f8fafc; /* fondo de la página */
   --color-borde: #e2e8f0; /* bordes de tarjetas y separadores */
 }
+
+/*
+  Foco amarillo sobre fondo azul (logo y menú de la cabecera).
+  @utility: patrón pequeño y transversal, sin marcado propio. Funciona como
+  cualquier utilidad de Tailwind y se puede usar con @apply.
+*/
+@utility foco-pelota {
+  border-radius: var(--radius-sm);
+
+  &:focus-visible {
+    outline: 2px solid var(--color-pelota);
+    outline-offset: 4px;
+  }
+}
+
+/*
+  Piezas que se repiten en el HTML (regla del curso: la misma lista de clases
+  2+ veces → extraer). En HTML plano, sin componentes, va en @layer components.
+  Al estar en esta capa, una utilidad en el HTML puede sobrescribirlas.
+*/
+@layer components {
+  /* Logo de texto: cabecera y pie (x2) */
+  .logo {
+    @apply foco-pelota text-lg font-bold text-pelota;
+  }
+
+  /* Título de columna del pie (x2) */
+  .pie-titulo {
+    @apply text-sm font-semibold tracking-wide text-pelota uppercase;
+  }
+
+  /* Enlace sobre fondo oscuro: menú de la cabecera y del pie (x9+). hover: solo existe con ratón → pareja con active: para el dedo */
+  .enlace-nav {
+    @apply foco-pelota transition-colors hover:text-pelota active:text-pelota;
+  }
+
+  /* Tarjeta de funcionalidad (x6). `group` va en el HTML: no es una utilidad */
+  .tarjeta {
+    @apply flex flex-col overflow-hidden rounded-xl border border-borde bg-white shadow-sm transition duration-300 focus-within:shadow-lg hover:shadow-lg motion-safe:focus-within:-translate-y-1 motion-safe:hover:-translate-y-1;
+  }
+
+  .tarjeta-imagen {
+    @apply aspect-video w-full bg-borde object-cover transition-transform duration-300 motion-safe:group-focus-within:scale-105 motion-safe:group-hover:scale-105;
+  }
+
+  .tarjeta-dato {
+    @apply self-start rounded-full bg-pelota px-3 py-1 text-sm font-semibold text-tinta;
+  }
+
+  /*
+    Paso de "Cómo funciona" (x3).
+    flex-1: los tres miden lo mismo en fila (flex: 1 1 0%, tema 19).
+    flex-col + items-center + text-center: contenido centrado en el bloque.
+  */
+  .paso {
+    @apply flex flex-1 flex-col items-center gap-3 text-center;
+  }
+
+  /* Círculo con el número: el centrado de 3 líneas (flex + items-center + justify-center) */
+  .paso-numero {
+    @apply flex size-12 items-center justify-center rounded-full bg-pelota text-xl font-bold text-tinta;
+  }
+
+  /* Botón con borde: hero y tarjetas (x7) */
+  .boton-secundario {
+    @apply rounded-lg border-2 border-pista px-5 py-3 font-semibold text-pista transition-colors hover:bg-pista hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pista active:bg-pista-oscuro active:text-white;
+  }
+}

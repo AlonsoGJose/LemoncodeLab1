@@ -1,5 +1,9 @@
 <!doctype html>
-<html lang="es">
+<!--
+  motion-safe:scroll-smooth: desplazamiento suave a las anclas (#como-funciona…), salvo si el usuario pide reducir movimiento.
+  scroll-pt-*: deja hueco arriba al saltar a una sección para que la cabecera sticky no tape el título.
+-->
+<html lang="es" class="scroll-pt-24 motion-safe:scroll-smooth md:scroll-pt-16">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,41 +19,21 @@
         class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-6 gap-y-2 px-4 py-3"
       >
         <!-- Logo: nombre provisional (MyCourt) hasta decidir el definitivo -->
-        <a
-          href="/"
-          class="rounded-sm text-lg font-bold text-pelota focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-pelota"
-          >MyCourt</a
-        >
+        <a href="/" class="logo">MyCourt</a>
 
         <nav aria-label="Principal">
           <ul class="flex flex-wrap gap-x-4 gap-y-1">
             <li>
-              <a
-                href="#funcionalidades"
-                class="rounded-sm transition-colors hover:text-pelota focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-pelota"
-                >Funcionalidades</a
-              >
+              <a href="#funcionalidades" class="enlace-nav">Funcionalidades</a>
             </li>
             <li>
-              <a
-                href="#como-funciona"
-                class="rounded-sm transition-colors hover:text-pelota focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-pelota"
-                >Cómo funciona</a
-              >
+              <a href="#como-funciona" class="enlace-nav">Cómo funciona</a>
             </li>
             <li>
-              <a
-                href="#faq"
-                class="rounded-sm transition-colors hover:text-pelota focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-pelota"
-                >Preguntas</a
-              >
+              <a href="#faq" class="enlace-nav">Preguntas</a>
             </li>
             <li>
-              <a
-                href="#"
-                class="rounded-sm transition-colors hover:text-pelota focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-pelota"
-                >Entrar</a
-              >
+              <a href="#" class="enlace-nav">Entrar</a>
             </li>
           </ul>
         </nav>
@@ -84,20 +68,18 @@
                 >Apúntate al ranking</a
               >
               <!-- Botón secundario -->
-              <a
-                href="#como-funciona"
-                class="rounded-lg border-2 border-pista px-5 py-3 font-semibold text-pista transition-colors hover:bg-pista hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pista"
+              <a href="#como-funciona" class="boton-secundario"
                 >Ver cómo funciona</a
               >
             </div>
           </div>
 
-          <!-- Imagen: pendiente de elegir la foto (public/img/hero-pista.webp). Revisar el alt cuando esté. -->
+          <!-- Imagen: foto de Carles Rabada (Unsplash) -->
           <img
             src="/img/hero-pista.webp"
-            alt="Pista de tenis dura de color azul vista desde arriba"
+            alt="Pista de tenis dura azul vista desde arriba, con la red en diagonal"
             width="1200"
-            height="900"
+            height="675"
             class="aspect-4/3 w-full rounded-xl bg-borde object-cover shadow-lg"
           />
         </div>
@@ -115,45 +97,270 @@
           </h2>
 
           <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            <!-- Prueba de imagen: el resto de tarjetas se adaptarán igual cuando estén sus fotos -->
-            <article
-              class="overflow-hidden rounded-lg border border-borde bg-white"
-            >
-              <img
-                src="/img/reservar-pista.webp"
-                alt="Pista de tenis dura azul vacía, vista desde la entrada de la grada"
-                width="800"
-                height="533"
-                loading="lazy"
-                class="aspect-video w-full object-cover"
-              />
-              <div class="p-4">
-                <h3 class="font-semibold">Reservar pista</h3>
+            <!--
+              Estructura de cada tarjeta:
+              - <div overflow-hidden> alrededor de la imagen para que el zoom del hover no tape el texto.
+              - Cuerpo flex-col + flex-1 y botón con mt-auto: los botones quedan alineados abajo aunque los textos midan distinto.
+              Fotos pendientes (todas menos reservar-pista): revisar alt, width y height cuando estén.
+            -->
+            <article class="tarjeta group">
+              <div class="overflow-hidden">
+                <img
+                  src="/img/reservar-pista.webp"
+                  alt="Pista de tenis dura azul vacía, vista desde la entrada de la grada"
+                  width="800"
+                  height="533"
+                  loading="lazy"
+                  class="tarjeta-imagen"
+                />
+              </div>
+              <div class="flex flex-1 flex-col gap-3 p-5">
+                <h3 class="text-lg font-semibold">Reservar pista</h3>
+                <p>
+                  Elige día y hora y reserva tu pista desde el móvil, sin llamar
+                  al club.
+                </p>
+                <p class="tarjeta-dato">6 pistas disponibles</p>
+                <a
+                  href="#"
+                  class="boton-secundario mt-auto self-start px-4 py-2"
+                  >Reservar</a
+                >
               </div>
             </article>
 
-            <article class="rounded-lg border border-borde bg-white p-4">
-              <h3 class="font-semibold">Clasificación</h3>
+            <article class="tarjeta group">
+              <div class="overflow-hidden">
+                <img
+                  src="/img/clasificacion.webp"
+                  alt="Trofeo de tenis junto a la pista"
+                  width="800"
+                  height="533"
+                  loading="lazy"
+                  class="tarjeta-imagen"
+                />
+              </div>
+              <div class="flex flex-1 flex-col gap-3 p-5">
+                <h3 class="text-lg font-semibold">Clasificación</h3>
+                <p>
+                  Consulta tu posición en la fase, actualizada después de cada
+                  partido.
+                </p>
+                <p class="tarjeta-dato">48 jugadores este curso</p>
+                <a
+                  href="#"
+                  class="boton-secundario mt-auto self-start px-4 py-2"
+                  >Ver ranking</a
+                >
+              </div>
             </article>
 
-            <article class="rounded-lg border border-borde bg-white p-4">
-              <h3 class="font-semibold">Mis partidos</h3>
+            <article class="tarjeta group">
+              <div class="overflow-hidden">
+                <img
+                  src="/img/mis-partidos.webp"
+                  alt="Jugador sacando en una pista dura azul"
+                  width="800"
+                  height="533"
+                  loading="lazy"
+                  class="tarjeta-imagen"
+                />
+              </div>
+              <div class="flex flex-1 flex-col gap-3 p-5">
+                <h3 class="text-lg font-semibold">Mis partidos</h3>
+                <p>
+                  Tus próximos rivales y el historial de todos tus resultados.
+                </p>
+                <p class="tarjeta-dato">Próximo: sábado, 10:00</p>
+                <a
+                  href="#"
+                  class="boton-secundario mt-auto self-start px-4 py-2"
+                  >Ver mis partidos</a
+                >
+              </div>
             </article>
 
-            <article class="rounded-lg border border-borde bg-white p-4">
-              <h3 class="font-semibold">Subir resultado</h3>
+            <article class="tarjeta group">
+              <div class="overflow-hidden">
+                <img
+                  src="/img/subir-resultado.webp"
+                  alt="Dos jugadores dándose la mano en la red al acabar el partido"
+                  width="800"
+                  height="533"
+                  loading="lazy"
+                  class="tarjeta-imagen"
+                />
+              </div>
+              <div class="flex flex-1 flex-col gap-3 p-5">
+                <h3 class="text-lg font-semibold">Subir resultado</h3>
+                <p>
+                  Apunta el marcador al terminar; tu rival lo confirma y el
+                  ranking se actualiza solo.
+                </p>
+                <p class="tarjeta-dato">En 30 segundos</p>
+                <a
+                  href="#"
+                  class="boton-secundario mt-auto self-start px-4 py-2"
+                  >Subir resultado</a
+                >
+              </div>
             </article>
 
-            <article class="rounded-lg border border-borde bg-white p-4">
-              <h3 class="font-semibold">Normas</h3>
+            <article class="tarjeta group">
+              <div class="overflow-hidden">
+                <img
+                  src="/img/normas.webp"
+                  alt="Pelota de tenis sobre la línea de la pista"
+                  width="800"
+                  height="450"
+                  loading="lazy"
+                  class="tarjeta-imagen"
+                />
+              </div>
+              <div class="flex flex-1 flex-col gap-3 p-5">
+                <h3 class="text-lg font-semibold">Normas</h3>
+                <p>
+                  El reglamento del ranking: plazos para jugar, ascensos,
+                  descensos y partidos no disputados.
+                </p>
+                <p class="tarjeta-dato">Temporada 2026-27</p>
+                <a
+                  href="#"
+                  class="boton-secundario mt-auto self-start px-4 py-2"
+                  >Leer las normas</a
+                >
+              </div>
             </article>
 
-            <article class="rounded-lg border border-borde bg-white p-4">
-              <h3 class="font-semibold">Mi perfil</h3>
+            <article class="tarjeta group">
+              <div class="overflow-hidden">
+                <img
+                  src="/img/mi-perfil.webp"
+                  alt="Raqueta y pelotas de tenis en el banco de la pista"
+                  width="800"
+                  height="533"
+                  loading="lazy"
+                  class="tarjeta-imagen"
+                />
+              </div>
+              <div class="flex flex-1 flex-col gap-3 p-5">
+                <h3 class="text-lg font-semibold">Mi perfil</h3>
+                <p>Tus datos, tu nivel y tus estadísticas de la temporada.</p>
+                <p class="tarjeta-dato">12 victorias</p>
+                <a
+                  href="#"
+                  class="boton-secundario mt-auto self-start px-4 py-2"
+                  >Ir a mi perfil</a
+                >
+              </div>
             </article>
           </div>
         </div>
       </section>
+
+      <!-- Cómo funciona (O6): franja azul a todo el ancho, contenido centrado -->
+      <section
+        id="como-funciona"
+        aria-labelledby="como-funciona-titulo"
+        class="bg-pista py-16 text-white"
+      >
+        <div class="mx-auto max-w-6xl px-4">
+          <h2
+            id="como-funciona-titulo"
+            class="mb-10 text-center text-2xl font-bold"
+          >
+            Cómo funciona
+          </h2>
+
+          <!-- <ol>: son pasos en orden. En columna en móvil, en fila desde md: -->
+          <ol class="flex flex-col gap-10 md:flex-row">
+            <li class="paso">
+              <span class="paso-numero">1</span>
+              <h3 class="text-lg font-semibold">Apúntate</h3>
+              <p>
+                Rellena la inscripción y el profe te coloca en una fase según tu
+                nivel.
+              </p>
+            </li>
+
+            <li class="paso">
+              <span class="paso-numero">2</span>
+              <h3 class="text-lg font-semibold">Juega</h3>
+              <p>
+                Queda con tu rival, reserva pista desde la app y jugad dentro
+                del plazo.
+              </p>
+            </li>
+
+            <li class="paso">
+              <span class="paso-numero">3</span>
+              <h3 class="text-lg font-semibold">Sube el resultado</h3>
+              <p>
+                Apunta el marcador, tu rival lo confirma y escalas posiciones en
+                el ranking.
+              </p>
+            </li>
+          </ol>
+        </div>
+      </section>
     </main>
+
+    <!-- Pie (O7): 3 columnas desde md:, apiladas en móvil. Datos de contacto inventados -->
+    <footer class="bg-tinta text-white">
+      <div class="mx-auto max-w-6xl px-4 py-12">
+        <div class="grid grid-cols-1 gap-10 md:grid-cols-3">
+          <!-- Columna 1: marca -->
+          <div>
+            <a href="/" class="logo">MyCourt</a>
+            <p class="mt-3 max-w-xs text-white/70">
+              El ranking de tenis de tu club, sin Excel ni correos.
+            </p>
+          </div>
+
+          <!-- Columna 2: enlaces -->
+          <nav aria-labelledby="pie-enlaces-titulo">
+            <h2 id="pie-enlaces-titulo" class="pie-titulo">Enlaces</h2>
+            <ul class="mt-3 flex flex-col gap-2">
+              <li>
+                <a href="#funcionalidades" class="enlace-nav"
+                  >Funcionalidades</a
+                >
+              </li>
+              <li>
+                <a href="#como-funciona" class="enlace-nav">Cómo funciona</a>
+              </li>
+              <li><a href="#faq" class="enlace-nav">Preguntas</a></li>
+              <li><a href="#" class="enlace-nav">Entrar</a></li>
+            </ul>
+          </nav>
+
+          <!-- Columna 3: contacto -->
+          <div>
+            <h2 class="pie-titulo">Contacto</h2>
+            <address class="mt-3 flex flex-col gap-2 not-italic">
+              <span>Club de Tenis La Red</span>
+              <span>Calle del Saque, 15 · 28000 Madrid</span>
+              <a href="mailto:hola@mycourt.app" class="enlace-nav self-start"
+                >hola@mycourt.app</a
+              >
+            </address>
+          </div>
+        </div>
+
+        <!-- Línea final separada con un borde -->
+        <div
+          class="mt-10 flex flex-col gap-2 border-t border-white/20 pt-6 text-sm text-white/70 sm:flex-row sm:justify-between"
+        >
+          <p>© 2026 MyCourt · Proyecto de prácticas de Lemoncode</p>
+          <p>
+            Fotos:
+            <a href="https://unsplash.com" class="enlace-nav underline"
+              >Unsplash</a
+            >
+            (Carles Rabada, Denise Jans, Lutfan Yazid)
+          </p>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
