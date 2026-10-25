@@ -15,14 +15,51 @@
   --color-pelota: #d7f205; /* amarillo pelota: acentos, botón destacado, datos */
   --color-pelota-oscuro: #b8d000; /* hover del acento */
 
-  /* Neutros */
-  --color-tinta: #0f172a; /* texto principal */
+  /* Neutro fijo: no cambia en modo oscuro */
+  --color-tinta: #0f172a; /* texto sobre amarillo (datos, números) y fondo del pie */
+
+  /*
+    Semánticos: cambian de valor en modo oscuro (ver más abajo). El HTML usa
+    estos nombres y no sabe en qué modo está: no hace falta un dark: en cada elemento.
+  */
   --color-fondo: #f8fafc; /* fondo de la página */
+  --color-texto: #0f172a; /* texto principal */
+  --color-superficie: #ffffff; /* tarjetas, preguntas, formulario y campos */
   --color-borde: #e2e8f0; /* bordes de tarjetas y separadores */
   --color-borde-campo: #64748b; /* bordes de campos de formulario: 3:1 con el blanco (el anterior no llega) */
+  --color-enlace: #1e4f8c; /* acento sobre fondo claro: botón secundario, flecha, foco (= pista) */
+  --color-enlace-oscuro: #163a66; /* :active de lo anterior (= pista-oscuro) */
+  --color-sobre-enlace: #ffffff; /* texto encima de un fondo "enlace" */
 
   /* Estados */
   --color-error: #b91c1c; /* mensajes y borde de campo con error: 6,5:1 sobre blanco */
+}
+
+/*
+  Modo oscuro (P1, nivel básico): sigue la preferencia del sistema (prefers-color-scheme),
+  sin JavaScript. Solo se redefinen los tokens semánticos; la variante dark: de Tailwind
+  (que en v4 usa esta misma media query) queda para los casos puntuales del HTML.
+  Criterio: sobre fondo oscuro el acento es el amarillo pelota, como en la cabecera y el pie
+  (el azul pista sobre fondo oscuro no llega al contraste mínimo).
+*/
+@layer base {
+  :root {
+    color-scheme: light dark; /* controles nativos (radios, barras de scroll) en el modo que toque */
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-fondo: #0b1222;
+      --color-texto: #e5ebf4; /* ~16:1 sobre fondo, ~13:1 sobre superficie */
+      --color-superficie: #16213a;
+      --color-borde: #2a3a5a;
+      --color-borde-campo: #94a3b8; /* ~6:1 sobre superficie */
+      --color-enlace: var(--color-pelota); /* ~13:1 sobre superficie */
+      --color-enlace-oscuro: var(--color-pelota-oscuro);
+      --color-sobre-enlace: var(--color-tinta);
+      --color-error: #f87171; /* el rojo oscuro no llega sobre fondo oscuro: ~5,5:1 */
+    }
+  }
 }
 
 /*
@@ -54,11 +91,12 @@
 }
 
 /*
-  Foco azul sobre fondo claro (botones y preguntas de la FAQ). Mismo patrón que foco-pelota.
+  Foco con el color de enlace (botones, preguntas de la FAQ): azul en modo claro, amarillo en oscuro.
+  Mismo patrón que foco-pelota.
 */
-@utility foco-pista {
+@utility foco-enlace {
   &:focus-visible {
-    outline: 2px solid var(--color-pista);
+    outline: 2px solid var(--color-enlace);
     outline-offset: 2px;
   }
 }
@@ -99,7 +137,7 @@
 
   /* Tarjeta de funcionalidad (x6). `group` va en el HTML: no es una utilidad */
   .tarjeta {
-    @apply flex flex-col overflow-hidden rounded-xl border border-borde bg-white shadow-sm transition duration-300 focus-within:shadow-lg hover:shadow-lg active:shadow-lg motion-safe:focus-within:-translate-y-1 motion-safe:hover:-translate-y-1 motion-safe:active:-translate-y-1;
+    @apply flex flex-col overflow-hidden rounded-xl border border-borde bg-superficie shadow-sm transition duration-300 focus-within:shadow-lg hover:shadow-lg active:shadow-lg motion-safe:focus-within:-translate-y-1 motion-safe:hover:-translate-y-1 motion-safe:active:-translate-y-1;
   }
 
   .tarjeta-imagen {
@@ -136,7 +174,7 @@
 
   /* Botón con borde: hero y tarjetas (x7) */
   .boton-secundario {
-    @apply rounded-lg border-2 border-pista px-5 py-3 font-semibold text-pista foco-pista transition-colors hover:bg-pista hover:text-white active:bg-pista-oscuro active:text-white;
+    @apply rounded-lg border-2 border-enlace px-5 py-3 font-semibold text-enlace foco-enlace transition-colors hover:bg-enlace hover:text-sobre-enlace active:bg-enlace-oscuro active:text-sobre-enlace;
   }
 
   /*
@@ -154,7 +192,7 @@
     group-open: aplica estilos a los hijos cuando el <details> está abierto.
   */
   .pregunta {
-    @apply rounded-xl border border-borde bg-white shadow-sm;
+    @apply rounded-xl border border-borde bg-superficie shadow-sm;
   }
 
   /*
@@ -162,7 +200,7 @@
     (el segundo es para Safari) y lo sustituimos por nuestra flecha.
   */
   .pregunta-titulo {
-    @apply flex cursor-pointer list-none items-center justify-between gap-4 rounded-xl p-5 font-semibold foco-pista transition-colors hover:text-pista active:text-pista [&::-webkit-details-marker]:hidden;
+    @apply flex cursor-pointer list-none items-center justify-between gap-4 rounded-xl p-5 font-semibold foco-enlace transition-colors hover:text-enlace active:text-enlace [&::-webkit-details-marker]:hidden;
   }
 
   /* Respuesta de la FAQ (x6) */
@@ -172,12 +210,12 @@
 
   /* Flecha que gira al abrir; shrink-0 para que no se aplaste con preguntas largas */
   .pregunta-flecha {
-    @apply size-5 shrink-0 text-pista group-open:rotate-180 motion-safe:transition-transform motion-safe:duration-300;
+    @apply size-5 shrink-0 text-enlace group-open:rotate-180 motion-safe:transition-transform motion-safe:duration-300;
   }
 
   /* Botón relleno: hero y formulario (x2) */
   .boton-principal {
-    @apply cursor-pointer rounded-lg border-2 border-pista bg-pista px-5 py-3 font-semibold text-white foco-pista transition-colors hover:border-pista-oscuro hover:bg-pista-oscuro active:border-pista-oscuro active:bg-pista-oscuro;
+    @apply cursor-pointer rounded-lg border-2 border-pista bg-pista px-5 py-3 font-semibold text-white foco-enlace transition-colors hover:border-pista-oscuro hover:bg-pista-oscuro active:border-pista-oscuro active:bg-pista-oscuro;
   }
 
   /* Formulario */
@@ -191,16 +229,16 @@
     - user-invalid: solo marca el error cuando el usuario ya ha tocado el campo (invalid: lo marcaría al cargar la página).
   */
   .campo {
-    @apply w-full rounded-lg border border-borde-campo bg-white px-4 py-3 text-tinta transition-colors placeholder:text-borde-campo user-invalid:border-error focus:border-pista focus:outline-2 focus:outline-offset-2 focus:outline-pista user-invalid:focus:outline-error;
+    @apply w-full rounded-lg border border-borde-campo bg-superficie px-4 py-3 text-texto transition-colors placeholder:text-borde-campo user-invalid:border-error focus:border-enlace focus:outline-2 focus:outline-offset-2 focus:outline-enlace user-invalid:focus:outline-error;
   }
 
-  /* Radio con su texto (x2). accent-pista: pinta el control nativo con el azul de marca */
+  /* Radio con su texto (x2). accent-enlace: pinta el control nativo con el azul de marca */
   .opcion {
     @apply flex items-center gap-2;
   }
 
   .opcion-control {
-    @apply size-4 accent-pista;
+    @apply size-4 accent-enlace;
   }
 
   /* Mensaje de error: oculto hasta que el campo anterior (peer) es inválido */
