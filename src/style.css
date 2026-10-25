@@ -54,6 +54,26 @@
 }
 
 /*
+  Foco azul sobre fondo claro (botones y preguntas de la FAQ). Mismo patrón que foco-pelota.
+*/
+@utility foco-pista {
+  &:focus-visible {
+    outline: 2px solid var(--color-pista);
+    outline-offset: 2px;
+  }
+}
+
+/*
+  Contenedor centrado (x5): el fondo de la sección ocupa todo el ancho; el contenido, como mucho 6xl.
+  @utility y no clase de componente: es un patrón de layout transversal, sin marcado propio.
+*/
+@utility contenedor {
+  margin-inline: auto;
+  max-width: var(--container-6xl);
+  padding-inline: calc(var(--spacing) * 4);
+}
+
+/*
   Piezas que se repiten en el HTML (regla del curso: la misma lista de clases
   2+ veces → extraer). En HTML plano, sin componentes, va en @layer components.
   Al estar en esta capa, una utilidad en el HTML puede sobrescribirlas.
@@ -69,18 +89,31 @@
     @apply text-sm font-semibold tracking-wide text-pelota uppercase;
   }
 
-  /* Enlace sobre fondo oscuro: menú de la cabecera y del pie (x9+). hover: solo existe con ratón → pareja con active: para el dedo */
+  /*
+    Enlace sobre fondo oscuro: menú de la cabecera y del pie (x9+). hover: solo existe con ratón → pareja con active: para el dedo.
+    inline-block + py-1: zona para pulsar de ~29 px de alto (la skill pide 24 px como mínimo).
+  */
   .enlace-nav {
-    @apply foco-pelota transition-colors hover:text-pelota active:text-pelota;
+    @apply inline-block foco-pelota py-1 transition-colors hover:text-pelota active:text-pelota;
   }
 
   /* Tarjeta de funcionalidad (x6). `group` va en el HTML: no es una utilidad */
   .tarjeta {
-    @apply flex flex-col overflow-hidden rounded-xl border border-borde bg-white shadow-sm transition duration-300 focus-within:shadow-lg hover:shadow-lg motion-safe:focus-within:-translate-y-1 motion-safe:hover:-translate-y-1;
+    @apply flex flex-col overflow-hidden rounded-xl border border-borde bg-white shadow-sm transition duration-300 focus-within:shadow-lg hover:shadow-lg active:shadow-lg motion-safe:focus-within:-translate-y-1 motion-safe:hover:-translate-y-1 motion-safe:active:-translate-y-1;
   }
 
   .tarjeta-imagen {
-    @apply aspect-video w-full bg-borde object-cover transition-transform duration-300 motion-safe:group-focus-within:scale-105 motion-safe:group-hover:scale-105;
+    @apply aspect-video w-full bg-borde object-cover transition-transform duration-300 motion-safe:group-focus-within:scale-105 motion-safe:group-hover:scale-105 motion-safe:group-active:scale-105;
+  }
+
+  /* Rejilla de tarjetas (x2, un bloque por rol): 1 → 2 → 3 columnas */
+  .rejilla-tarjetas {
+    @apply grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3;
+  }
+
+  /* Cuerpo de la tarjeta (x6): flex-1 para que ocupe el alto sobrante y el botón (mt-auto) quede abajo */
+  .tarjeta-cuerpo {
+    @apply flex flex-1 flex-col gap-3 p-5;
   }
 
   .tarjeta-dato {
@@ -103,7 +136,17 @@
 
   /* Botón con borde: hero y tarjetas (x7) */
   .boton-secundario {
-    @apply rounded-lg border-2 border-pista px-5 py-3 font-semibold text-pista transition-colors hover:bg-pista hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pista active:bg-pista-oscuro active:text-white;
+    @apply rounded-lg border-2 border-pista px-5 py-3 font-semibold text-pista foco-pista transition-colors hover:bg-pista hover:text-white active:bg-pista-oscuro active:text-white;
+  }
+
+  /*
+    Ajuste del botón secundario dentro de la tarjeta (x6): más compacto y pegado abajo.
+    Se usa junto a .boton-secundario (class="boton-secundario tarjeta-boton"): en v4 @apply
+    solo acepta utilidades, no otra clase de @layer components. Va DESPUÉS de .boton-secundario
+    para que, en la misma capa, su padding gane.
+  */
+  .tarjeta-boton {
+    @apply mt-auto self-start px-4 py-2;
   }
 
   /*
@@ -119,7 +162,12 @@
     (el segundo es para Safari) y lo sustituimos por nuestra flecha.
   */
   .pregunta-titulo {
-    @apply flex cursor-pointer list-none items-center justify-between gap-4 rounded-xl p-5 font-semibold transition-colors hover:text-pista focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pista [&::-webkit-details-marker]:hidden;
+    @apply flex cursor-pointer list-none items-center justify-between gap-4 rounded-xl p-5 font-semibold foco-pista transition-colors hover:text-pista active:text-pista [&::-webkit-details-marker]:hidden;
+  }
+
+  /* Respuesta de la FAQ (x6) */
+  .pregunta-respuesta {
+    @apply px-5 pb-5;
   }
 
   /* Flecha que gira al abrir; shrink-0 para que no se aplaste con preguntas largas */
@@ -129,7 +177,7 @@
 
   /* Botón relleno: hero y formulario (x2) */
   .boton-principal {
-    @apply cursor-pointer rounded-lg border-2 border-pista bg-pista px-5 py-3 font-semibold text-white transition-colors hover:border-pista-oscuro hover:bg-pista-oscuro focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pista active:border-pista-oscuro active:bg-pista-oscuro;
+    @apply cursor-pointer rounded-lg border-2 border-pista bg-pista px-5 py-3 font-semibold text-white foco-pista transition-colors hover:border-pista-oscuro hover:bg-pista-oscuro active:border-pista-oscuro active:bg-pista-oscuro;
   }
 
   /* Formulario */

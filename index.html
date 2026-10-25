@@ -10,7 +10,8 @@
     <title>MyCourt · Clases, horarios y ranking de tu club de tenis</title>
     <link rel="stylesheet" href="/src/style.css" />
   </head>
-  <body class="bg-fondo font-sans leading-relaxed text-tinta">
+  <!-- ontouchstart="": sin él, iOS Safari no activa :active al tocar (lo pide la skill del curso) -->
+  <body class="bg-fondo font-sans leading-relaxed text-tinta" ontouchstart="">
     <!--
       Cabecera con efecto cristal (P2): azul al 85 % + backdrop-blur-md (desenfoca lo que pasa por detrás).
       sticky (no fixed): ocupa su sitio en el flujo, así que no tapa el principio de la página.
@@ -19,14 +20,17 @@
     <header class="sticky top-0 z-50 bg-pista/85 text-white backdrop-blur-md">
       <!-- Contenedor centrado: el fondo azul ocupa todo el ancho, el contenido no -->
       <div
-        class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-6 gap-y-2 px-4 py-3"
+        class="contenedor flex flex-wrap items-center justify-between gap-x-6 gap-y-2 py-3"
       >
         <a href="/" class="logo">MyCourt</a>
 
         <nav aria-label="Principal">
-          <ul class="flex flex-wrap gap-x-4 gap-y-1">
+          <!-- En móvil: text-sm y gap-x-3 para que los 4 enlaces quepan en una fila bajo el logo -->
+          <ul
+            class="flex flex-wrap gap-x-3 gap-y-1 text-sm sm:gap-x-4 sm:text-base"
+          >
             <li>
-              <a href="#funcionalidades" class="enlace-nav">Funcionalidades</a>
+              <a href="#funcionalidades" class="enlace-nav">Funciones</a>
             </li>
             <li>
               <a href="#como-funciona" class="enlace-nav">Cómo funciona</a>
@@ -35,6 +39,7 @@
               <a href="#faq" class="enlace-nav">Preguntas</a>
             </li>
             <li>
+              <!-- Entrar: pantalla de login fuera del alcance del laboratorio (es del TFM) -->
               <a href="#" class="enlace-nav">Entrar</a>
             </li>
           </ul>
@@ -48,9 +53,7 @@
         aria-labelledby="hero-titulo"
         class="flex min-h-[33dvh] flex-col justify-center py-12"
       >
-        <div
-          class="mx-auto grid w-full max-w-6xl items-center gap-10 px-4 md:grid-cols-2"
-        >
+        <div class="contenedor grid w-full items-center gap-10 md:grid-cols-2">
           <!-- Texto -->
           <div>
             <h1 id="hero-titulo" class="text-4xl font-bold md:text-5xl">
@@ -72,14 +75,26 @@
             </div>
           </div>
 
-          <!-- Imagen: foto de Carles Rabada (Unsplash) -->
-          <img
-            src="/img/hero-pista.webp"
-            alt="Pista de tenis dura azul vista desde arriba, con la red en diagonal"
-            width="1200"
-            height="675"
-            class="aspect-4/3 w-full rounded-xl bg-borde object-cover shadow-lg"
-          />
+          <!--
+            Imagen (foto de Carles Rabada, Unsplash) con un chip encima que enseña la app.
+            relative en el contenedor + absolute en el chip: el chip se coloca respecto a la foto (tema 17).
+            aria-hidden: es un ejemplo decorativo, no un dato real que deba leer el lector de pantalla.
+          -->
+          <div class="relative">
+            <img
+              src="/img/hero-pista.webp"
+              alt="Pista de tenis dura azul vista desde arriba, con la red en diagonal"
+              width="1200"
+              height="675"
+              class="aspect-4/3 w-full rounded-xl bg-borde object-cover shadow-lg"
+            />
+            <p
+              aria-hidden="true"
+              class="tarjeta-dato absolute bottom-4 left-4 shadow-lg"
+            >
+              Próxima clase: martes, 18:00 · Pista 1
+            </p>
+          </div>
         </div>
       </section>
 
@@ -89,7 +104,7 @@
         aria-labelledby="funcionalidades-titulo"
         class="py-12"
       >
-        <div class="mx-auto max-w-6xl px-4">
+        <div class="contenedor">
           <h2 id="funcionalidades-titulo" class="mb-6 text-2xl font-bold">
             Todo lo que puedes hacer
           </h2>
@@ -98,33 +113,33 @@
             Estructura de cada tarjeta:
             - <div overflow-hidden> alrededor de la imagen para que el zoom del hover no tape el texto.
             - Cuerpo flex-col + flex-1 y botón con mt-auto: los botones quedan alineados abajo aunque los textos midan distinto.
+            - alt="": la foto es decorativa (ambiente de club); lo que hace cada tarjeta ya lo dice su título.
+            - Los botones llevan al formulario: sin cuenta, todavía no se puede hacer nada de esto.
           -->
           <section aria-labelledby="alumnos-titulo">
             <h3 id="alumnos-titulo" class="mb-4 text-xl font-semibold">
               Para alumnos
             </h3>
-            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div class="rejilla-tarjetas">
               <article class="tarjeta group">
                 <div class="overflow-hidden">
                   <img
                     src="/img/mi-horario.webp"
-                    alt="Vista aérea de seis pistas de tenis azules con varios grupos dando clase"
+                    alt=""
                     width="800"
                     height="600"
                     loading="lazy"
                     class="tarjeta-imagen"
                   />
                 </div>
-                <div class="flex flex-1 flex-col gap-3 p-5">
+                <div class="tarjeta-cuerpo">
                   <h4 class="text-lg font-semibold">Mi horario</h4>
                   <p>
                     Tus clases de la semana de un vistazo: día, hora, pista y
                     profe.
                   </p>
                   <p class="tarjeta-dato">Próxima: martes, 18:00</p>
-                  <a
-                    href="#"
-                    class="boton-secundario mt-auto self-start px-4 py-2"
+                  <a href="#apuntate" class="boton-secundario tarjeta-boton"
                     >Ver mi horario</a
                   >
                 </div>
@@ -133,24 +148,22 @@
                 <div class="overflow-hidden">
                   <img
                     src="/img/avisar-ausencia.webp"
-                    alt="Pista de tenis azul vista a través de la valla, con jugadores desenfocados al fondo"
+                    alt=""
                     width="800"
                     height="533"
                     loading="lazy"
                     class="tarjeta-imagen"
                   />
                 </div>
-                <div class="flex flex-1 flex-col gap-3 p-5">
+                <div class="tarjeta-cuerpo">
                   <h4 class="text-lg font-semibold">Avisar de una ausencia</h4>
                   <p>
                     ¿No puedes ir? Avisa con un toque y tu profe lo verá al
                     momento en su calendario.
                   </p>
                   <p class="tarjeta-dato">Sin llamadas ni mensajes</p>
-                  <a
-                    href="#"
-                    class="boton-secundario mt-auto self-start px-4 py-2"
-                    >Avisar</a
+                  <a href="#apuntate" class="boton-secundario tarjeta-boton"
+                    >Avisar de una ausencia</a
                   >
                 </div>
               </article>
@@ -158,23 +171,21 @@
                 <div class="overflow-hidden">
                   <img
                     src="/img/mis-partidos.webp"
-                    alt="Jugador sacando en una pista dura azul"
+                    alt=""
                     width="800"
                     height="533"
                     loading="lazy"
                     class="tarjeta-imagen"
                   />
                 </div>
-                <div class="flex flex-1 flex-col gap-3 p-5">
+                <div class="tarjeta-cuerpo">
                   <h4 class="text-lg font-semibold">Ranking</h4>
                   <p>
                     Juega tus partidos, sube el resultado y consulta tu posición
                     en la fase.
                   </p>
                   <p class="tarjeta-dato">48 jugadores este curso</p>
-                  <a
-                    href="#"
-                    class="boton-secundario mt-auto self-start px-4 py-2"
+                  <a href="#apuntate" class="boton-secundario tarjeta-boton"
                     >Ver el ranking</a
                   >
                 </div>
@@ -186,27 +197,25 @@
             <h3 id="profesores-titulo" class="mb-4 text-xl font-semibold">
               Para profesores
             </h3>
-            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div class="rejilla-tarjetas">
               <article class="tarjeta group">
                 <div class="overflow-hidden">
                   <img
-                    src="/img/reservar-pista.webp"
-                    alt="Pista de tenis dura azul vacía, vista desde la entrada de la grada"
+                    src="/img/mis-clases.webp"
+                    alt=""
                     width="800"
                     height="533"
                     loading="lazy"
                     class="tarjeta-imagen"
                   />
                 </div>
-                <div class="flex flex-1 flex-col gap-3 p-5">
+                <div class="tarjeta-cuerpo">
                   <h4 class="text-lg font-semibold">Mis clases</h4>
                   <p>
                     Crea grupos, asigna alumnos y organiza tu semana de clases.
                   </p>
                   <p class="tarjeta-dato">12 grupos esta temporada</p>
-                  <a
-                    href="#"
-                    class="boton-secundario mt-auto self-start px-4 py-2"
+                  <a href="#apuntate" class="boton-secundario tarjeta-boton"
                     >Organizar clases</a
                   >
                 </div>
@@ -215,23 +224,21 @@
                 <div class="overflow-hidden">
                   <img
                     src="/img/calendario.webp"
-                    alt="Alumnos sentados en un banco junto a la pista, con sus raquetas apoyadas en el suelo"
+                    alt=""
                     width="800"
                     height="533"
                     loading="lazy"
                     class="tarjeta-imagen"
                   />
                 </div>
-                <div class="flex flex-1 flex-col gap-3 p-5">
+                <div class="tarjeta-cuerpo">
                   <h4 class="text-lg font-semibold">Calendario y ausencias</h4>
                   <p>
                     Mira quién falta a cada clase; los avisos aparecen solos en
                     tu calendario.
                   </p>
                   <p class="tarjeta-dato">3 ausencias esta semana</p>
-                  <a
-                    href="#"
-                    class="boton-secundario mt-auto self-start px-4 py-2"
+                  <a href="#apuntate" class="boton-secundario tarjeta-boton"
                     >Ver el calendario</a
                   >
                 </div>
@@ -239,25 +246,23 @@
               <article class="tarjeta group">
                 <div class="overflow-hidden">
                   <img
-                    src="/img/normas.webp"
-                    alt="Pelota de tenis sobre la línea de la pista"
+                    src="/img/gestionar-ranking.webp"
+                    alt=""
                     width="800"
                     height="450"
                     loading="lazy"
                     class="tarjeta-imagen"
                   />
                 </div>
-                <div class="flex flex-1 flex-col gap-3 p-5">
+                <div class="tarjeta-cuerpo">
                   <h4 class="text-lg font-semibold">Gestionar el ranking</h4>
                   <p>
                     Inscripciones, fases y resultados en un solo sitio, sin
                     Excel.
                   </p>
                   <p class="tarjeta-dato">Fase 2 de 4</p>
-                  <a
-                    href="#"
-                    class="boton-secundario mt-auto self-start px-4 py-2"
-                    >Gestionar el ranking</a
+                  <a href="#apuntate" class="boton-secundario tarjeta-boton"
+                    >Abrir el ranking</a
                   >
                 </div>
               </article>
@@ -272,7 +277,7 @@
         aria-labelledby="como-funciona-titulo"
         class="bg-pista py-16 text-white"
       >
-        <div class="mx-auto max-w-6xl px-4">
+        <div class="contenedor">
           <h2
             id="como-funciona-titulo"
             class="mb-10 text-center text-2xl font-bold"
@@ -284,28 +289,30 @@
           <ol class="flex flex-col gap-10 md:flex-row">
             <li class="paso">
               <span class="paso-numero">1</span>
-              <h3 class="text-lg font-semibold">Tu profe te da de alta</h3>
+              <h3 class="text-lg font-semibold">Pide el alta</h3>
               <p>
-                Te crea la cuenta y te asigna tus clases (y el ranking, si te
-                apuntas).
+                Rellena el formulario y el club crea tu cuenta de alumno o de
+                profe.
               </p>
             </li>
 
             <li class="paso">
               <span class="paso-numero">2</span>
-              <h3 class="text-lg font-semibold">Consulta tu horario</h3>
+              <h3 class="text-lg font-semibold">
+                Tu profe te asigna tus clases
+              </h3>
               <p>
-                Mira tus clases de la semana y, si un día no puedes ir, avísalo
-                desde la app.
+                Te coloca en el grupo de tu nivel. Si eres adulto, también
+                puedes apuntarte al ranking.
               </p>
             </li>
 
             <li class="paso">
               <span class="paso-numero">3</span>
-              <h3 class="text-lg font-semibold">Todo al día</h3>
+              <h3 class="text-lg font-semibold">Todo al día, desde el móvil</h3>
               <p>
-                Tu profe ve los cambios en su calendario y el ranking se
-                actualiza solo.
+                Consulta tu horario, avisa si no puedes ir y tu profe lo verá en
+                su calendario.
               </p>
             </li>
           </ol>
@@ -335,10 +342,10 @@
                   <path d="m6 9 6 6 6-6" />
                 </svg>
               </summary>
-              <p class="px-5 pb-5">
+              <p class="pregunta-respuesta">
                 Los alumnos y los profesores del club. Cada uno entra con su
                 cuenta y ve solo lo suyo: el alumno, su horario y el ranking; el
-                profesor, sus clases, el calendario y la gestión del ranking.
+                profe, sus clases, el calendario y la gestión del ranking.
               </p>
             </details>
             <details class="pregunta group">
@@ -357,7 +364,7 @@
                   <path d="m6 9 6 6 6-6" />
                 </svg>
               </summary>
-              <p class="px-5 pb-5">
+              <p class="pregunta-respuesta">
                 En "Mi horario", abre la clase y pulsa "No puedo ir". Tu profe
                 lo verá al momento en su calendario. Avisa con al menos 24 horas
                 de antelación.
@@ -379,7 +386,7 @@
                   <path d="m6 9 6 6 6-6" />
                 </svg>
               </summary>
-              <p class="px-5 pb-5">
+              <p class="pregunta-respuesta">
                 Sí, si avisaste con 24 horas de antelación: tu profe puede
                 ofrecerte un hueco libre en otro grupo de tu nivel.
               </p>
@@ -400,7 +407,7 @@
                   <path d="m6 9 6 6 6-6" />
                 </svg>
               </summary>
-              <p class="px-5 pb-5">
+              <p class="pregunta-respuesta">
                 No, es voluntario. Te apuntas al principio de cada fase y puedes
                 dejarlo cuando quieras.
               </p>
@@ -421,7 +428,7 @@
                   <path d="m6 9 6 6 6-6" />
                 </svg>
               </summary>
-              <p class="px-5 pb-5">
+              <p class="pregunta-respuesta">
                 Cada fase dura 4 semanas. Si un partido no se juega en plazo,
                 ninguno de los dos suma puntos; si uno no se presenta, gana el
                 otro por 6-0 6-0.
@@ -443,7 +450,7 @@
                   <path d="m6 9 6 6 6-6" />
                 </svg>
               </summary>
-              <p class="px-5 pb-5">
+              <p class="pregunta-respuesta">
                 Al acabar cada fase, los 2 primeros suben a la fase de arriba y
                 los 2 últimos bajan a la de abajo.
               </p>
@@ -466,8 +473,8 @@
             Empieza ahora
           </h2>
           <p class="mt-3 text-center">
-            Rellena el formulario y el club te dará de alta como alumno o
-            profesor.
+            Rellena el formulario y el club creará tu cuenta de alumno o de
+            profe.
           </p>
 
           <form
@@ -488,8 +495,20 @@
                   required
                   minlength="3"
                   autocomplete="name"
+                  aria-describedby="nombre-pista"
                   class="campo peer"
                 />
+                <!--
+                  Pista visible desde el principio (la regla se ve antes de equivocarse), asociada al campo con aria-describedby.
+                  Va DEBAJO del campo para que nombre y correo queden alineados en dos columnas,
+                  y se oculta (peer-user-invalid:hidden) cuando aparece el error, que ya dice lo mismo.
+                -->
+                <p
+                  id="nombre-pista"
+                  class="mt-2 text-sm text-borde-campo peer-user-invalid:hidden"
+                >
+                  Mínimo 3 letras.
+                </p>
                 <p class="campo-error">Escribe tu nombre (mínimo 3 letras).</p>
               </div>
 
@@ -548,7 +567,7 @@
 
     <!-- Pie (O7): 3 columnas desde md:, apiladas en móvil -->
     <footer class="bg-tinta text-white">
-      <div class="mx-auto max-w-6xl px-4 py-12">
+      <div class="contenedor py-12">
         <div class="grid grid-cols-1 gap-10 md:grid-cols-3">
           <!-- Columna 1: marca -->
           <div>
@@ -563,9 +582,7 @@
             <h2 id="pie-enlaces-titulo" class="pie-titulo">Enlaces</h2>
             <ul class="mt-3 flex flex-col gap-2">
               <li>
-                <a href="#funcionalidades" class="enlace-nav"
-                  >Funcionalidades</a
-                >
+                <a href="#funcionalidades" class="enlace-nav">Funciones</a>
               </li>
               <li>
                 <a href="#como-funciona" class="enlace-nav">Cómo funciona</a>
