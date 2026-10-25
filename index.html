@@ -11,12 +11,16 @@
     <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body class="bg-fondo font-sans leading-relaxed text-tinta">
-    <header class="sticky top-0 z-50 bg-pista text-white">
+    <!--
+      Cabecera con efecto cristal (P2): azul al 85 % + backdrop-blur-md (desenfoca lo que pasa por detrás).
+      sticky (no fixed): ocupa su sitio en el flujo, así que no tapa el principio de la página.
+      z-50: sin él, las tarjetas (que con el hover crean su propio contexto de apilamiento) pasarían por encima.
+    -->
+    <header class="sticky top-0 z-50 bg-pista/85 text-white backdrop-blur-md">
       <!-- Contenedor centrado: el fondo azul ocupa todo el ancho, el contenido no -->
       <div
         class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-6 gap-y-2 px-4 py-3"
       >
-        <!-- Logo: nombre provisional (MyCourt) hasta decidir el definitivo -->
         <a href="/" class="logo">MyCourt</a>
 
         <nav aria-label="Principal">
@@ -94,7 +98,6 @@
             Estructura de cada tarjeta:
             - <div overflow-hidden> alrededor de la imagen para que el zoom del hover no tape el texto.
             - Cuerpo flex-col + flex-1 y botón con mt-auto: los botones quedan alineados abajo aunque los textos midan distinto.
-            Fotos pendientes: mi-horario, avisar-ausencia y calendario (revisar alt, width y height cuando estén).
           -->
           <section aria-labelledby="alumnos-titulo">
             <h3 id="alumnos-titulo" class="mb-4 text-xl font-semibold">
@@ -105,9 +108,9 @@
                 <div class="overflow-hidden">
                   <img
                     src="/img/mi-horario.webp"
-                    alt="Calendario semanal con las clases de tenis marcadas"
+                    alt="Vista aérea de seis pistas de tenis azules con varios grupos dando clase"
                     width="800"
-                    height="533"
+                    height="600"
                     loading="lazy"
                     class="tarjeta-imagen"
                   />
@@ -130,7 +133,7 @@
                 <div class="overflow-hidden">
                   <img
                     src="/img/avisar-ausencia.webp"
-                    alt="Alumno avisando desde el móvil de que no irá a clase"
+                    alt="Pista de tenis azul vista a través de la valla, con jugadores desenfocados al fondo"
                     width="800"
                     height="533"
                     loading="lazy"
@@ -212,7 +215,7 @@
                 <div class="overflow-hidden">
                   <img
                     src="/img/calendario.webp"
-                    alt="Profesor de tenis consultando el calendario de clases"
+                    alt="Alumnos sentados en un banco junto a la pista, con sus raquetas apoyadas en el suelo"
                     width="800"
                     height="533"
                     loading="lazy"
