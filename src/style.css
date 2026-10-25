@@ -1,9 +1,17 @@
 @import "tailwindcss";
+/* Fuente de los títulos, servida desde el propio proyecto (Fontsource), sin depender de Google */
+@import "@fontsource-variable/outfit";
 
 @theme {
-  /* Marca */
+  /* Tipografía: --font-titulos crea la utilidad font-titulos */
+  --font-titulos: "Outfit Variable", ui-sans-serif, system-ui, sans-serif;
+
+  /* Marca: azul en 3 tonos */
+  --color-pista-claro: #e6eef8; /* fondo suave: sección del formulario */
   --color-pista: #1e4f8c; /* azul pista dura: cabecera, botones principales, enlaces */
   --color-pista-oscuro: #163a66; /* hover de lo anterior */
+
+  /* Acento */
   --color-pelota: #d7f205; /* amarillo pelota: acentos, botón destacado, datos */
   --color-pelota-oscuro: #b8d000; /* hover del acento */
 
@@ -11,6 +19,24 @@
   --color-tinta: #0f172a; /* texto principal */
   --color-fondo: #f8fafc; /* fondo de la página */
   --color-borde: #e2e8f0; /* bordes de tarjetas y separadores */
+  --color-borde-campo: #64748b; /* bordes de campos de formulario: 3:1 con el blanco (el anterior no llega) */
+
+  /* Estados */
+  --color-error: #b91c1c; /* mensajes y borde de campo con error: 6,5:1 sobre blanco */
+}
+
+/*
+  Todos los títulos con la fuente de marca. Es una regla para etiquetas
+  (no para una pieza concreta), así que va en la capa base y no hace falta
+  repetir font-titulos en cada <h1>…<h4>.
+*/
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-titulos);
+  }
 }
 
 /*
@@ -35,7 +61,7 @@
 @layer components {
   /* Logo de texto: cabecera y pie (x2) */
   .logo {
-    @apply foco-pelota text-lg font-bold text-pelota;
+    @apply foco-pelota font-titulos text-xl font-bold text-pelota;
   }
 
   /* Título de columna del pie (x2) */
@@ -72,11 +98,65 @@
 
   /* Círculo con el número: el centrado de 3 líneas (flex + items-center + justify-center) */
   .paso-numero {
-    @apply flex size-12 items-center justify-center rounded-full bg-pelota text-xl font-bold text-tinta;
+    @apply flex size-12 items-center justify-center rounded-full bg-pelota font-titulos text-xl font-bold text-tinta;
   }
 
   /* Botón con borde: hero y tarjetas (x7) */
   .boton-secundario {
     @apply rounded-lg border-2 border-pista px-5 py-3 font-semibold text-pista transition-colors hover:bg-pista hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pista active:bg-pista-oscuro active:text-white;
+  }
+
+  /*
+    Pregunta plegable de la FAQ (x6): <details class="pregunta group">.
+    group-open: aplica estilos a los hijos cuando el <details> está abierto.
+  */
+  .pregunta {
+    @apply rounded-xl border border-borde bg-white shadow-sm;
+  }
+
+  /*
+    list-none + ::-webkit-details-marker: quitan el triángulo del navegador
+    (el segundo es para Safari) y lo sustituimos por nuestra flecha.
+  */
+  .pregunta-titulo {
+    @apply flex cursor-pointer list-none items-center justify-between gap-4 rounded-xl p-5 font-semibold transition-colors hover:text-pista focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pista [&::-webkit-details-marker]:hidden;
+  }
+
+  /* Flecha que gira al abrir; shrink-0 para que no se aplaste con preguntas largas */
+  .pregunta-flecha {
+    @apply size-5 shrink-0 text-pista group-open:rotate-180 motion-safe:transition-transform motion-safe:duration-300;
+  }
+
+  /* Botón relleno: hero y formulario (x2) */
+  .boton-principal {
+    @apply cursor-pointer rounded-lg border-2 border-pista bg-pista px-5 py-3 font-semibold text-white transition-colors hover:border-pista-oscuro hover:bg-pista-oscuro focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pista active:border-pista-oscuro active:bg-pista-oscuro;
+  }
+
+  /* Formulario */
+  .campo-etiqueta {
+    @apply mb-2 block font-semibold;
+  }
+
+  /*
+    Campo de texto / select.
+    - border-borde-campo: los bordes de un campo necesitan 3:1 de contraste con el fondo (el gris "borde" no llega).
+    - user-invalid: solo marca el error cuando el usuario ya ha tocado el campo (invalid: lo marcaría al cargar la página).
+  */
+  .campo {
+    @apply w-full rounded-lg border border-borde-campo bg-white px-4 py-3 text-tinta transition-colors placeholder:text-borde-campo user-invalid:border-error focus:border-pista focus:outline-2 focus:outline-offset-2 focus:outline-pista user-invalid:focus:outline-error;
+  }
+
+  /* Radio con su texto (x2). accent-pista: pinta el control nativo con el azul de marca */
+  .opcion {
+    @apply flex items-center gap-2;
+  }
+
+  .opcion-control {
+    @apply size-4 accent-pista;
+  }
+
+  /* Mensaje de error: oculto hasta que el campo anterior (peer) es inválido */
+  .campo-error {
+    @apply mt-2 hidden text-sm font-medium text-error peer-user-invalid:block;
   }
 }

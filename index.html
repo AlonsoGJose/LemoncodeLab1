@@ -7,9 +7,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>
-      Ranking de tenis del club · Reserva, juega y consulta la clasificación
-    </title>
+    <title>MyCourt · Clases, horarios y ranking de tu club de tenis</title>
     <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body class="bg-fondo font-sans leading-relaxed text-tinta">
@@ -52,21 +50,17 @@
           <!-- Texto -->
           <div>
             <h1 id="hero-titulo" class="text-4xl font-bold md:text-5xl">
-              El ranking de tu club, sin Excel
+              Tu club de tenis, organizado
             </h1>
             <p class="mt-4 max-w-prose text-lg">
-              Apúntate, juega tus partidos y sube el resultado desde el móvil.
-              MyCourt actualiza la clasificación al momento, sin hojas de
-              cálculo ni correos.
+              Los profes organizan sus clases y el ranking; los alumnos ven su
+              horario, avisan si no pueden ir y suben sus resultados. Cada uno
+              ve lo suyo, desde el móvil y sin Excel ni correos.
             </p>
 
             <div class="mt-8 flex flex-wrap gap-3">
               <!-- Botón principal -->
-              <a
-                href="#apuntate"
-                class="rounded-lg border-2 border-pista bg-pista px-5 py-3 font-semibold text-white transition-colors hover:border-pista-oscuro hover:bg-pista-oscuro focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pista"
-                >Apúntate al ranking</a
-              >
+              <a href="#apuntate" class="boton-principal">Empieza ahora</a>
               <!-- Botón secundario -->
               <a href="#como-funciona" class="boton-secundario"
                 >Ver cómo funciona</a
@@ -85,7 +79,7 @@
         </div>
       </section>
 
-      <!-- Tarjetas (O5) -->
+      <!-- Tarjetas (O5): dos bloques según el rol, 3 tarjetas cada uno (una fila desde lg:) -->
       <section
         id="funcionalidades"
         aria-labelledby="funcionalidades-titulo"
@@ -96,165 +90,176 @@
             Todo lo que puedes hacer
           </h2>
 
-          <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            <!--
-              Estructura de cada tarjeta:
-              - <div overflow-hidden> alrededor de la imagen para que el zoom del hover no tape el texto.
-              - Cuerpo flex-col + flex-1 y botón con mt-auto: los botones quedan alineados abajo aunque los textos midan distinto.
-              Fotos pendientes (todas menos reservar-pista): revisar alt, width y height cuando estén.
-            -->
-            <article class="tarjeta group">
-              <div class="overflow-hidden">
-                <img
-                  src="/img/reservar-pista.webp"
-                  alt="Pista de tenis dura azul vacía, vista desde la entrada de la grada"
-                  width="800"
-                  height="533"
-                  loading="lazy"
-                  class="tarjeta-imagen"
-                />
-              </div>
-              <div class="flex flex-1 flex-col gap-3 p-5">
-                <h3 class="text-lg font-semibold">Reservar pista</h3>
-                <p>
-                  Elige día y hora y reserva tu pista desde el móvil, sin llamar
-                  al club.
-                </p>
-                <p class="tarjeta-dato">6 pistas disponibles</p>
-                <a
-                  href="#"
-                  class="boton-secundario mt-auto self-start px-4 py-2"
-                  >Reservar</a
-                >
-              </div>
-            </article>
+          <!--
+            Estructura de cada tarjeta:
+            - <div overflow-hidden> alrededor de la imagen para que el zoom del hover no tape el texto.
+            - Cuerpo flex-col + flex-1 y botón con mt-auto: los botones quedan alineados abajo aunque los textos midan distinto.
+            Fotos pendientes: mi-horario, avisar-ausencia y calendario (revisar alt, width y height cuando estén).
+          -->
+          <section aria-labelledby="alumnos-titulo">
+            <h3 id="alumnos-titulo" class="mb-4 text-xl font-semibold">
+              Para alumnos
+            </h3>
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              <article class="tarjeta group">
+                <div class="overflow-hidden">
+                  <img
+                    src="/img/mi-horario.webp"
+                    alt="Calendario semanal con las clases de tenis marcadas"
+                    width="800"
+                    height="533"
+                    loading="lazy"
+                    class="tarjeta-imagen"
+                  />
+                </div>
+                <div class="flex flex-1 flex-col gap-3 p-5">
+                  <h4 class="text-lg font-semibold">Mi horario</h4>
+                  <p>
+                    Tus clases de la semana de un vistazo: día, hora, pista y
+                    profe.
+                  </p>
+                  <p class="tarjeta-dato">Próxima: martes, 18:00</p>
+                  <a
+                    href="#"
+                    class="boton-secundario mt-auto self-start px-4 py-2"
+                    >Ver mi horario</a
+                  >
+                </div>
+              </article>
+              <article class="tarjeta group">
+                <div class="overflow-hidden">
+                  <img
+                    src="/img/avisar-ausencia.webp"
+                    alt="Alumno avisando desde el móvil de que no irá a clase"
+                    width="800"
+                    height="533"
+                    loading="lazy"
+                    class="tarjeta-imagen"
+                  />
+                </div>
+                <div class="flex flex-1 flex-col gap-3 p-5">
+                  <h4 class="text-lg font-semibold">Avisar de una ausencia</h4>
+                  <p>
+                    ¿No puedes ir? Avisa con un toque y tu profe lo verá al
+                    momento en su calendario.
+                  </p>
+                  <p class="tarjeta-dato">Sin llamadas ni mensajes</p>
+                  <a
+                    href="#"
+                    class="boton-secundario mt-auto self-start px-4 py-2"
+                    >Avisar</a
+                  >
+                </div>
+              </article>
+              <article class="tarjeta group">
+                <div class="overflow-hidden">
+                  <img
+                    src="/img/mis-partidos.webp"
+                    alt="Jugador sacando en una pista dura azul"
+                    width="800"
+                    height="533"
+                    loading="lazy"
+                    class="tarjeta-imagen"
+                  />
+                </div>
+                <div class="flex flex-1 flex-col gap-3 p-5">
+                  <h4 class="text-lg font-semibold">Ranking</h4>
+                  <p>
+                    Juega tus partidos, sube el resultado y consulta tu posición
+                    en la fase.
+                  </p>
+                  <p class="tarjeta-dato">48 jugadores este curso</p>
+                  <a
+                    href="#"
+                    class="boton-secundario mt-auto self-start px-4 py-2"
+                    >Ver el ranking</a
+                  >
+                </div>
+              </article>
+            </div>
+          </section>
 
-            <article class="tarjeta group">
-              <div class="overflow-hidden">
-                <img
-                  src="/img/clasificacion.webp"
-                  alt="Trofeo de tenis junto a la pista"
-                  width="800"
-                  height="533"
-                  loading="lazy"
-                  class="tarjeta-imagen"
-                />
-              </div>
-              <div class="flex flex-1 flex-col gap-3 p-5">
-                <h3 class="text-lg font-semibold">Clasificación</h3>
-                <p>
-                  Consulta tu posición en la fase, actualizada después de cada
-                  partido.
-                </p>
-                <p class="tarjeta-dato">48 jugadores este curso</p>
-                <a
-                  href="#"
-                  class="boton-secundario mt-auto self-start px-4 py-2"
-                  >Ver ranking</a
-                >
-              </div>
-            </article>
-
-            <article class="tarjeta group">
-              <div class="overflow-hidden">
-                <img
-                  src="/img/mis-partidos.webp"
-                  alt="Jugador sacando en una pista dura azul"
-                  width="800"
-                  height="533"
-                  loading="lazy"
-                  class="tarjeta-imagen"
-                />
-              </div>
-              <div class="flex flex-1 flex-col gap-3 p-5">
-                <h3 class="text-lg font-semibold">Mis partidos</h3>
-                <p>
-                  Tus próximos rivales y el historial de todos tus resultados.
-                </p>
-                <p class="tarjeta-dato">Próximo: sábado, 10:00</p>
-                <a
-                  href="#"
-                  class="boton-secundario mt-auto self-start px-4 py-2"
-                  >Ver mis partidos</a
-                >
-              </div>
-            </article>
-
-            <article class="tarjeta group">
-              <div class="overflow-hidden">
-                <img
-                  src="/img/subir-resultado.webp"
-                  alt="Dos jugadores dándose la mano en la red al acabar el partido"
-                  width="800"
-                  height="533"
-                  loading="lazy"
-                  class="tarjeta-imagen"
-                />
-              </div>
-              <div class="flex flex-1 flex-col gap-3 p-5">
-                <h3 class="text-lg font-semibold">Subir resultado</h3>
-                <p>
-                  Apunta el marcador al terminar; tu rival lo confirma y el
-                  ranking se actualiza solo.
-                </p>
-                <p class="tarjeta-dato">En 30 segundos</p>
-                <a
-                  href="#"
-                  class="boton-secundario mt-auto self-start px-4 py-2"
-                  >Subir resultado</a
-                >
-              </div>
-            </article>
-
-            <article class="tarjeta group">
-              <div class="overflow-hidden">
-                <img
-                  src="/img/normas.webp"
-                  alt="Pelota de tenis sobre la línea de la pista"
-                  width="800"
-                  height="450"
-                  loading="lazy"
-                  class="tarjeta-imagen"
-                />
-              </div>
-              <div class="flex flex-1 flex-col gap-3 p-5">
-                <h3 class="text-lg font-semibold">Normas</h3>
-                <p>
-                  El reglamento del ranking: plazos para jugar, ascensos,
-                  descensos y partidos no disputados.
-                </p>
-                <p class="tarjeta-dato">Temporada 2026-27</p>
-                <a
-                  href="#"
-                  class="boton-secundario mt-auto self-start px-4 py-2"
-                  >Leer las normas</a
-                >
-              </div>
-            </article>
-
-            <article class="tarjeta group">
-              <div class="overflow-hidden">
-                <img
-                  src="/img/mi-perfil.webp"
-                  alt="Raqueta y pelotas de tenis en el banco de la pista"
-                  width="800"
-                  height="533"
-                  loading="lazy"
-                  class="tarjeta-imagen"
-                />
-              </div>
-              <div class="flex flex-1 flex-col gap-3 p-5">
-                <h3 class="text-lg font-semibold">Mi perfil</h3>
-                <p>Tus datos, tu nivel y tus estadísticas de la temporada.</p>
-                <p class="tarjeta-dato">12 victorias</p>
-                <a
-                  href="#"
-                  class="boton-secundario mt-auto self-start px-4 py-2"
-                  >Ir a mi perfil</a
-                >
-              </div>
-            </article>
-          </div>
+          <section aria-labelledby="profesores-titulo" class="mt-12">
+            <h3 id="profesores-titulo" class="mb-4 text-xl font-semibold">
+              Para profesores
+            </h3>
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              <article class="tarjeta group">
+                <div class="overflow-hidden">
+                  <img
+                    src="/img/reservar-pista.webp"
+                    alt="Pista de tenis dura azul vacía, vista desde la entrada de la grada"
+                    width="800"
+                    height="533"
+                    loading="lazy"
+                    class="tarjeta-imagen"
+                  />
+                </div>
+                <div class="flex flex-1 flex-col gap-3 p-5">
+                  <h4 class="text-lg font-semibold">Mis clases</h4>
+                  <p>
+                    Crea grupos, asigna alumnos y organiza tu semana de clases.
+                  </p>
+                  <p class="tarjeta-dato">12 grupos esta temporada</p>
+                  <a
+                    href="#"
+                    class="boton-secundario mt-auto self-start px-4 py-2"
+                    >Organizar clases</a
+                  >
+                </div>
+              </article>
+              <article class="tarjeta group">
+                <div class="overflow-hidden">
+                  <img
+                    src="/img/calendario.webp"
+                    alt="Profesor de tenis consultando el calendario de clases"
+                    width="800"
+                    height="533"
+                    loading="lazy"
+                    class="tarjeta-imagen"
+                  />
+                </div>
+                <div class="flex flex-1 flex-col gap-3 p-5">
+                  <h4 class="text-lg font-semibold">Calendario y ausencias</h4>
+                  <p>
+                    Mira quién falta a cada clase; los avisos aparecen solos en
+                    tu calendario.
+                  </p>
+                  <p class="tarjeta-dato">3 ausencias esta semana</p>
+                  <a
+                    href="#"
+                    class="boton-secundario mt-auto self-start px-4 py-2"
+                    >Ver el calendario</a
+                  >
+                </div>
+              </article>
+              <article class="tarjeta group">
+                <div class="overflow-hidden">
+                  <img
+                    src="/img/normas.webp"
+                    alt="Pelota de tenis sobre la línea de la pista"
+                    width="800"
+                    height="450"
+                    loading="lazy"
+                    class="tarjeta-imagen"
+                  />
+                </div>
+                <div class="flex flex-1 flex-col gap-3 p-5">
+                  <h4 class="text-lg font-semibold">Gestionar el ranking</h4>
+                  <p>
+                    Inscripciones, fases y resultados en un solo sitio, sin
+                    Excel.
+                  </p>
+                  <p class="tarjeta-dato">Fase 2 de 4</p>
+                  <a
+                    href="#"
+                    class="boton-secundario mt-auto self-start px-4 py-2"
+                    >Gestionar el ranking</a
+                  >
+                </div>
+              </article>
+            </div>
+          </section>
         </div>
       </section>
 
@@ -276,36 +281,269 @@
           <ol class="flex flex-col gap-10 md:flex-row">
             <li class="paso">
               <span class="paso-numero">1</span>
-              <h3 class="text-lg font-semibold">Apúntate</h3>
+              <h3 class="text-lg font-semibold">Tu profe te da de alta</h3>
               <p>
-                Rellena la inscripción y el profe te coloca en una fase según tu
-                nivel.
+                Te crea la cuenta y te asigna tus clases (y el ranking, si te
+                apuntas).
               </p>
             </li>
 
             <li class="paso">
               <span class="paso-numero">2</span>
-              <h3 class="text-lg font-semibold">Juega</h3>
+              <h3 class="text-lg font-semibold">Consulta tu horario</h3>
               <p>
-                Queda con tu rival, reserva pista desde la app y jugad dentro
-                del plazo.
+                Mira tus clases de la semana y, si un día no puedes ir, avísalo
+                desde la app.
               </p>
             </li>
 
             <li class="paso">
               <span class="paso-numero">3</span>
-              <h3 class="text-lg font-semibold">Sube el resultado</h3>
+              <h3 class="text-lg font-semibold">Todo al día</h3>
               <p>
-                Apunta el marcador, tu rival lo confirma y escalas posiciones en
-                el ranking.
+                Tu profe ve los cambios en su calendario y el ranking se
+                actualiza solo.
               </p>
             </li>
           </ol>
         </div>
       </section>
+      <!-- Preguntas frecuentes (P4): <details> + <summary>, plegable sin JavaScript -->
+      <section id="faq" aria-labelledby="faq-titulo" class="py-16">
+        <!-- max-w-3xl: más estrecho que el resto para que las respuestas se lean cómodas -->
+        <div class="mx-auto max-w-3xl px-4">
+          <h2 id="faq-titulo" class="mb-8 text-center text-2xl font-bold">
+            Preguntas frecuentes
+          </h2>
+          <div class="flex flex-col gap-3">
+            <details class="pregunta group">
+              <summary class="pregunta-titulo">
+                ¿Quién puede usar MyCourt?
+                <svg
+                  class="pregunta-flecha"
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              </summary>
+              <p class="px-5 pb-5">
+                Los alumnos y los profesores del club. Cada uno entra con su
+                cuenta y ve solo lo suyo: el alumno, su horario y el ranking; el
+                profesor, sus clases, el calendario y la gestión del ranking.
+              </p>
+            </details>
+            <details class="pregunta group">
+              <summary class="pregunta-titulo">
+                ¿Cómo aviso de que no puedo ir a clase?
+                <svg
+                  class="pregunta-flecha"
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              </summary>
+              <p class="px-5 pb-5">
+                En "Mi horario", abre la clase y pulsa "No puedo ir". Tu profe
+                lo verá al momento en su calendario. Avisa con al menos 24 horas
+                de antelación.
+              </p>
+            </details>
+            <details class="pregunta group">
+              <summary class="pregunta-titulo">
+                ¿Puedo recuperar una clase a la que no he ido?
+                <svg
+                  class="pregunta-flecha"
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              </summary>
+              <p class="px-5 pb-5">
+                Sí, si avisaste con 24 horas de antelación: tu profe puede
+                ofrecerte un hueco libre en otro grupo de tu nivel.
+              </p>
+            </details>
+            <details class="pregunta group">
+              <summary class="pregunta-titulo">
+                ¿Tengo que jugar el ranking si voy a clase?
+                <svg
+                  class="pregunta-flecha"
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              </summary>
+              <p class="px-5 pb-5">
+                No, es voluntario. Te apuntas al principio de cada fase y puedes
+                dejarlo cuando quieras.
+              </p>
+            </details>
+            <details class="pregunta group">
+              <summary class="pregunta-titulo">
+                ¿Cuánto tiempo tengo para jugar cada partido?
+                <svg
+                  class="pregunta-flecha"
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              </summary>
+              <p class="px-5 pb-5">
+                Cada fase dura 4 semanas. Si un partido no se juega en plazo,
+                ninguno de los dos suma puntos; si uno no se presenta, gana el
+                otro por 6-0 6-0.
+              </p>
+            </details>
+            <details class="pregunta group">
+              <summary class="pregunta-titulo">
+                ¿Cómo se sube y se baja de fase?
+                <svg
+                  class="pregunta-flecha"
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              </summary>
+              <p class="px-5 pb-5">
+                Al acabar cada fase, los 2 primeros suben a la fase de arriba y
+                los 2 últimos bajan a la de abajo.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
+      <!--
+        Formulario "Apúntate" (P5). Sin backend: solo maquetación.
+        Cada campo: <label> → <input class="peer"> → <p> de error. El error va DESPUÉS del campo
+        porque peer-* solo funciona con hermanos que vienen detrás.
+      -->
+      <section
+        id="apuntate"
+        aria-labelledby="apuntate-titulo"
+        class="bg-pista-claro py-16"
+      >
+        <div class="mx-auto max-w-2xl px-4">
+          <h2 id="apuntate-titulo" class="text-center text-2xl font-bold">
+            Empieza ahora
+          </h2>
+          <p class="mt-3 text-center">
+            Rellena el formulario y el club te dará de alta como alumno o
+            profesor.
+          </p>
+
+          <form
+            action="#"
+            method="post"
+            class="mt-8 flex flex-col gap-6 rounded-xl border border-borde bg-white p-6 shadow-sm sm:p-8"
+          >
+            <!-- Nombre y correo: uno debajo del otro en móvil, en dos columnas desde sm: -->
+            <div class="grid gap-6 sm:grid-cols-2">
+              <div>
+                <label for="nombre" class="campo-etiqueta"
+                  >Nombre y apellidos</label
+                >
+                <input
+                  id="nombre"
+                  name="nombre"
+                  type="text"
+                  required
+                  minlength="3"
+                  autocomplete="name"
+                  class="campo peer"
+                />
+                <p class="campo-error">Escribe tu nombre (mínimo 3 letras).</p>
+              </div>
+
+              <div>
+                <label for="correo" class="campo-etiqueta"
+                  >Correo electrónico</label
+                >
+                <input
+                  id="correo"
+                  name="correo"
+                  type="email"
+                  required
+                  autocomplete="email"
+                  placeholder="nombre@correo.com"
+                  class="campo peer"
+                />
+                <p class="campo-error">
+                  Escribe un correo válido, por ejemplo nombre@correo.com.
+                </p>
+              </div>
+            </div>
+
+            <!-- Radios agrupados: <fieldset> + <legend> hace de título del grupo -->
+            <fieldset>
+              <legend class="campo-etiqueta">Soy</legend>
+              <div class="flex flex-wrap gap-6">
+                <label class="opcion">
+                  <input
+                    type="radio"
+                    name="rol"
+                    value="alumno"
+                    checked
+                    class="opcion-control"
+                  />
+                  Alumno
+                </label>
+                <label class="opcion">
+                  <input
+                    type="radio"
+                    name="rol"
+                    value="profesor"
+                    class="opcion-control"
+                  />
+                  Profesor
+                </label>
+              </div>
+            </fieldset>
+
+            <button type="submit" class="boton-principal self-start">
+              Solicitar acceso
+            </button>
+          </form>
+        </div>
+      </section>
     </main>
 
-    <!-- Pie (O7): 3 columnas desde md:, apiladas en móvil. Datos de contacto inventados -->
+    <!-- Pie (O7): 3 columnas desde md:, apiladas en móvil -->
     <footer class="bg-tinta text-white">
       <div class="mx-auto max-w-6xl px-4 py-12">
         <div class="grid grid-cols-1 gap-10 md:grid-cols-3">
@@ -313,7 +551,7 @@
           <div>
             <a href="/" class="logo">MyCourt</a>
             <p class="mt-3 max-w-xs text-white/70">
-              El ranking de tenis de tu club, sin Excel ni correos.
+              Clases, horarios y ranking de tu club en una sola app.
             </p>
           </div>
 
@@ -338,10 +576,10 @@
           <div>
             <h2 class="pie-titulo">Contacto</h2>
             <address class="mt-3 flex flex-col gap-2 not-italic">
-              <span>Club de Tenis La Red</span>
-              <span>Calle del Saque, 15 · 28000 Madrid</span>
-              <a href="mailto:hola@mycourt.app" class="enlace-nav self-start"
-                >hola@mycourt.app</a
+              <span>Luckia Gaming Group</span>
+              <span>Camiño Martinete, 50 · 15008 A Coruña</span>
+              <a href="mailto:jagarcia@luckia.com" class="enlace-nav self-start"
+                >jagarcia@luckia.com</a
               >
             </address>
           </div>
